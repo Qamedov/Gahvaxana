@@ -1,0 +1,123 @@
+/* src/components/GallerySection.css */
+.gallery {
+  padding: 100px 0;
+  background-color: var(--primary-dark-brown);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(280px, 1fr)
+  ); /* Адаптивная сетка */
+  gap: 25px; /* Отступы между изображениями */
+  justify-content: center;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 280px; /* Фиксированная высота для единообразия */
+  object-fit: cover; /* Обрезает, чтобы заполнить контейнер */
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.8s ease,
+    transform 0.8s ease;
+  opacity: 0; /* Изначально скрыто для анимации */
+  transform: translateY(30px); /* Изначальное смещение для анимации */
+}
+
+.gallery-img:hover {
+  transform: scale(1.03); /* Увеличение при наведении */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Анимация появления */
+.gallery-img.fade-in-up {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Стили для модального окна */
+.gallery-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95); /* Темный полупрозрачный фон */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; /* Поверх всего */
+  cursor: pointer;
+  backdrop-filter: blur(5px); /* Эффект размытия фона */
+  animation: fadeInModal 0.3s ease-out; /* Анимация появления модала */
+}
+
+.modal-img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  animation: zoomInModal 0.3s ease-out; /* Анимация увеличения изображения */
+}
+
+/* Анимации для модального окна */
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomInModal {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Адаптивность для Gallery Section */
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .gallery-img {
+    height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr; /* Одна колонка на самых маленьких экранах */
+    gap: 15px;
+  }
+  .gallery-img {
+    height: 250px; /* Возможно, увеличить высоту для лучшего вида */
+  }
+  .modal-img {
+    max-width: 95%;
+    max-height: 95%;
+  }
+}
+/* src/components/GallerySection.css */
+.gallery-img {
+    /* ... (существующие стили) ... */
+    opacity: 0;
+    transform: translateY(40px) scale(0.95); /* Изначально скрыто, смещено и уменьшено */
+    transition: transform 0.8s ease, box-shadow 0.8s ease, opacity 0.8s ease, transform 0.8s ease;
+}
+
+.gallery-img.fade-in-up {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}

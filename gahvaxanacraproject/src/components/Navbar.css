@@ -1,0 +1,116 @@
+/* src/components/Navbar.css */
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: rgba(29, 15, 10, 0.95); /* Исходный фон */
+  padding: 15px 0;
+  transition: all 0.3s ease;
+  font-family: var(--font-body);
+}
+
+.navbar.scrolled {
+  background: rgba(29, 15, 10, 0.98); /* Фон при прокрутке */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 0 20px; Удаляем, так как .container уже добавляет */
+}
+
+.nav-logo h1 {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  color: var(--accent-gold);
+  letter-spacing: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.05rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent-gold);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--accent-gold);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Мобильное меню */
+.hamburger {
+  display: none; /* Скрываем на больших экранах */
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1001; /* Поверх меню */
+}
+
+/* Медиа-запросы для адаптивности навбара */
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 100%; /* Под навбаром */
+    left: 0;
+    width: 100%;
+    background: var(--primary-dark-brown);
+    flex-direction: column;
+    padding: 20px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    transform: translateY(-100%); /* Скрыто по умолчанию */
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+  }
+
+  .nav-links.mobile-active {
+    transform: translateY(0); /* Показываем меню */
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-link {
+    padding: 10px 0;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+  .nav-link::after {
+    left: 50%; /* Центрируем подчеркивание */
+    transform: translateX(-50%);
+  }
+
+  .hamburger {
+    display: block; /* Показываем гамбургер на мобильных */
+  }
+}

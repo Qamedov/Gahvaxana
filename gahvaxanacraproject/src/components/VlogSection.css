@@ -1,0 +1,132 @@
+/* src/components/VlogSection.css */
+.vlog {
+  padding: 100px 0;
+  background-color: var(--primary-dark-brown);
+  color: var(--text-light);
+}
+
+.vlog-intro-text {
+  text-align: center;
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.9);
+  max-width: 800px;
+  margin: -30px auto 60px auto; /* Сверху отступ, снизу больше для сетки */
+  line-height: 1.7;
+}
+
+.vlog-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* Адаптивная сетка */
+  gap: 40px;
+  justify-content: center;
+}
+
+.vlog-item {
+  background-color: var(--secondary-brown);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none; /* Убираем подчеркивание для ссылки */
+  color: inherit; /* Наследуем цвет текста */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.8s ease,
+    transform 0.8s ease;
+  opacity: 0; /* Изначально скрыто для анимации */
+  transform: translateY(30px); /* Изначальное смещение для анимации */
+}
+
+/* Анимация появления */
+.vlog-item.fade-in-up {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.vlog-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.vlog-thumbnail {
+  width: 100%;
+  height: 220px; /* Фиксированная высота для миниатюр */
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid rgba(6, 5, 5, 0.1);
+}
+
+.vlog-content {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.vlog-title {
+  font-family: var(--font-heading);
+  font-size: 1.9rem;
+  color: var(--accent-gold);
+  margin-bottom: 10px;
+}
+
+.vlog-description {
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 1.6;
+  margin-bottom: 15px;
+  flex-grow: 1;
+}
+
+.read-more {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--accent-gold);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: gap 0.3s ease;
+}
+
+.read-more:hover {
+  gap: 12px; /* Стрелка немного "выезжает" */
+}
+
+/* Адаптивность для Vlog Section */
+@media (max-width: 768px) {
+  .vlog-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .vlog-item {
+    /* ... (существующие стили) ... */
+    opacity: 0;
+    transform: translateY(40px) scale(0.95); /* Изначально скрыто, смещено и уменьшено */
+    transition: transform 0.8s ease, box-shadow 0.8s ease, opacity 0.8s ease, transform 0.8s ease;
+}
+  .vlog-intro-text {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .vlog {
+    padding: 60px 0;
+  }
+  .vlog-thumbnail {
+    height: 180px;
+  }
+  .vlog-content {
+    padding: 20px;
+  }
+  .vlog-title {
+    font-size: 1.6rem;
+  }
+  .vlog-description {
+    font-size: 0.9rem;
+  }
+}

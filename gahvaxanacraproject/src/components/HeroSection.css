@@ -1,0 +1,172 @@
+/* src/components/HeroSection.css */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh; /* Полная высота экрана */
+  padding-top: 60px; /* Отступ от навбара */
+  color: var(--text-light);
+  background-color: var(
+    --primary-dark-brown
+  ); /* Фоновый цвет, если изображение не на весь экран */
+  position: relative;
+  overflow: hidden; /* Важно для эффекта параллакса */
+  text-align: center; /* Центрируем контент */
+  flex-direction: column; /* Элементы будут располагаться друг над другом по умолчанию */
+}
+
+/* src/components/HeroSection.css */
+
+/* Основной контейнер Hero, чтобы контент мог анимироваться */
+.hero-content {
+    z-index: 2;
+    max-width: 800px;
+    padding: 20px;
+    /* Убедитесь, что для hero-content нет opacity:0 или transform: translateY(..) здесь */
+}
+
+/* Анимация для заголовка (typing-cursor уже есть в index.css, не меняем) */
+.hero-title {
+    /* ... (существующие стили: font-size, color, text-shadow и т.д.) ... */
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: .15em solid var(--accent-gold);
+    animation: typing-cursor .75s step-end infinite,
+               fadeInScale 1.5s ease-out forwards; /* НОВАЯ АНИМАЦИЯ - плавное появление и масштабирование */
+}
+
+/* НОВАЯ АНИМАЦИЯ: плавная проявка и небольшое масштабирование при появлении */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Анимация для подзаголовка */
+.hero-subtitle {
+    /* ... (существующие стили: font-size, color, text-shadow и т.д.) ... */
+    opacity: 0; /* Изначально скрыт */
+    transform: translateY(20px); /* Смещен вниз */
+    animation: fadeInUp 0.8s forwards; /* Используем уже существующую анимацию fadeInUp */
+    animation-delay: 1.5s; /* Задержка после заголовка */
+}
+
+/* Анимация для кнопки CTA */
+.cta-button {
+    /* ... (существующие стили: background-color, color, padding и т.д.) ... */
+    opacity: 0; /* Изначально скрыта */
+    transform: translateY(20px); /* Смещена вниз */
+    animation: fadeInUp 0.8s forwards; /* Используем уже существующую анимацию fadeInUp */
+    animation-delay: 2s; /* Задержка после подзаголовка */
+}
+
+/* @keyframes fadeInUp должен быть определен в src/index.css или здесь */
+/*
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+*/
+
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Для параллакса */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1; /* Под контентом */
+}
+
+.hero-img {
+  width: 110%; /* Немного больше, чтобы была область для параллакса */
+  min-width: 100vw; /* Занимает всю ширину */
+  min-height: 100vh; /* Занимает всю высоту */
+  object-fit: cover; /* Обрезает, чтобы заполнить контейнер */
+  filter: brightness(60%) contrast(110%); /* Небольшая коррекция для атмосферы */
+  transform: translateY(0); /* Начальное положение для параллакса */
+  transition: transform 0.05s ease-out; /* Плавность для параллакса */
+  opacity: 0; /* Изначально скрыто */
+  animation: fadeIn 1.5s forwards; /* Анимация появления при загрузке */
+}
+
+/* Анимация плавного появления изображения */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Адаптивность для Hero Section */
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+  .hero-subtitle {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 100px; /* Увеличим отступ для мобильного навбара */
+    justify-content: flex-start; /* Начнем контент сверху на мобильных */
+    text-align: center; /* Центрируем текст */
+  }
+  .hero-content {
+    padding: 20px;
+    order: 2; /* Контент ниже изображения на мобильных */
+    margin-top: 20vh; /* Немного сдвигаем контент вниз */
+  }
+  .hero-title {
+    font-size: 2.8rem;
+    white-space: normal; /* Разрешаем перенос строк */
+    border-right: none; /* Убираем курсор на мобильных, если текст переносится */
+    animation: none;
+  }
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  .hero-image {
+    position: absolute; /* Делаем изображение фоном */
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  .cta-button {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+}

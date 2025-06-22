@@ -1,0 +1,140 @@
+/* src/components/MerchSection.css */
+.merch {
+  padding: 100px 0;
+  background-color: var(--primary-dark-brown);
+  color: var(--text-light);
+}
+
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(280px, 1fr)
+  ); /* Адаптивная сетка */
+  gap: 40px; /* Отступы между элементами */
+  justify-content: center; /* Центрируем элементы в сетке */
+}
+
+.merch-item {
+  background-color: var(--secondary-brown); /* Фон для каждого элемента */
+  border-radius: 10px;
+  overflow: hidden; /* Обрезает углы изображения */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0; /* Изначально скрыто для анимации */
+  transform: translateY(30px); /* Изначальное смещение для анимации */
+}
+
+.merch-item.fade-in-up {
+  /* Этот класс добавляется IntersectionObserver */
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.merch-item:hover {
+  transform: translateY(-8px); /* Подъем при наведении */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.merch-img {
+  width: 100%;
+  height: 250px; /* Фиксированная высота для изображений */
+  object-fit: cover; /* Обрезает, чтобы заполнить */
+  display: block;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.merch-content {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Чтобы контент растягивался */
+  justify-content: space-between; /* Распределяет элементы по вертикали */
+}
+
+.merch-title {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--accent-gold);
+  margin-bottom: 10px;
+}
+
+.merch-description {
+  font-size: 0.95rem;
+  color: rgba(0, 0, 0, 0.8);
+  line-height: 1.6;
+  margin-bottom: 15px;
+  flex-grow: 1; /* Чтобы описание занимало больше места */
+}
+
+.merch-price {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 20px;
+  text-align: right; /* Цена справа */
+}
+
+.add-to-cart-button {
+  background-color: var(--accent-gold);
+  color: var(--primary-dark-brown);
+  font-family: var(--font-body);
+  font-weight: 600;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  width: 100%; /* Полная ширина кнопки */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.add-to-cart-button:hover {
+  background-color: #0c0a04;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Адаптивность для Merch Section */
+@media (max-width: 768px) {
+  .merch-item {
+    /* ... (существующие стили) ... */
+    opacity: 0;
+    transform: translateY(40px) scale(0.95); /* Изначально скрыто, смещено и уменьшено */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Плавный переход */
+  }
+  .merch-item {
+    max-width: 400px; /* Ограничиваем ширину элемента */
+    margin: 0 auto; /* Центрируем */
+  }
+}
+
+@media (max-width: 480px) {
+  .merch {
+    padding: 60px 0;
+  }
+  .merch-img {
+    height: 200px;
+  }
+  .merch-content {
+    padding: 20px;
+  }
+  .merch-title {
+    font-size: 1.5rem;
+  }
+  .merch-description {
+    font-size: 0.9rem;
+  }
+  .merch-price {
+    font-size: 1.4rem;
+  }
+  .add-to-cart-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
